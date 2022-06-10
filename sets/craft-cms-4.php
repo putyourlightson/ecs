@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
-use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use putyourlightson\ecs\SetList;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 
-return static function(ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__ . '/craft-cms-3.php');
+return static function(ECSConfig $ecsConfig): void {
+    $ecsConfig->sets([SetList::CRAFT_CMS_4]);
 
-    $services = $containerConfigurator->services();
-    $services->get(TrailingCommaInMultilineFixer::class)->call('configure', [[
-        'elements' => [
-            TrailingCommaInMultilineFixer::ELEMENTS_ARRAYS,
-            TrailingCommaInMultilineFixer::ELEMENTS_PARAMETERS,
-        ],
-    ]]);
-    $services->get(VisibilityRequiredFixer::class)->call('configure', [['elements' => ['const', 'method', 'property']]]);
+    // Enables parallel mode.
+    $ecsConfig->parallel();
+
+    // Sets the control structure continuation keyword to be on the next line.
+    $ecsConfig->ruleWithConfiguration(ControlStructureContinuationPositionFixer::class, [
+        'position' => ControlStructureContinuationPositionFixer::NEXT_LINE,
+    ]);
 };

@@ -2,29 +2,18 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
-use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
-use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
-use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
-use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
+use putyourlightson\ecs\SetList;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 
-return static function(ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(SetList::PSR_12);
+return static function(ECSConfig $ecsConfig): void {
+    $ecsConfig->sets([SetList::CRAFT_CMS_3]);
 
-    $services = $containerConfigurator->services();
-    $services->remove(MethodArgumentSpaceFixer::class);
-    $services->get(FunctionDeclarationFixer::class)->call('configure', [[
-        'closure_function_spacing' => FunctionDeclarationFixer::SPACING_NONE,
-    ]]);
-    $services->get(VisibilityRequiredFixer::class)->call('configure', [[
-        'elements' => ['method', 'property'],
-    ]]);
-    $services->set(TrailingCommaInMultilineFixer::class)->call('configure', [[
-        'elements' => [
-            TrailingCommaInMultilineFixer::ELEMENTS_ARRAYS,
-        ],
-    ]]);
-    $services->set(NoUnusedImportsFixer::class);
+    // Enables parallel mode.
+    $ecsConfig->parallel();
+
+    // Sets the control structure continuation keyword to be on the next line.
+    $ecsConfig->ruleWithConfiguration(ControlStructureContinuationPositionFixer::class, [
+        'position' => ControlStructureContinuationPositionFixer::NEXT_LINE,
+    ]);
 };
