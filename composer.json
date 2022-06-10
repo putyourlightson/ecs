@@ -1,6 +1,6 @@
 {
-    "name": "craftcms/ecs",
-    "description": "Easy Coding Standard configurations for Craft CMS projects",
+    "name": "putyourlightson/ecs",
+    "description": "Easy Coding Standard configurations for PutYourLightsOn projects",
     "require": {
         "php": "^7.2.5|^8.0.2",
         "symplify/easy-coding-standard": "^10.0"
