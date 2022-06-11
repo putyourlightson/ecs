@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-use putyourlightson\ecs\SetList;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return static function(ECSConfig $ecsConfig): void {
-    $ecsConfig->sets([SetList::CRAFT_CMS_4]);
+    $ecsConfig->sets([__DIR__ . '/../../../craftcms/ecs/sets/craft-cms-4.php']);
 
     // Enables parallel mode.
     $ecsConfig->parallel();
