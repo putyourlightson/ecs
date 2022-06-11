@@ -2,7 +2,6 @@
 
 Forked from https://github.com/craftcms/ecs with a few modifications:
 - Runs with `parallel` mode enabled.
-- Default paths.
 - Sets the control structure continuation keyword to be on the next line.
 
 To install, run the following command within your plugin or project:
