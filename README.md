@@ -4,6 +4,26 @@ Forked from https://github.com/craftcms/ecs with a few modifications:
 - Runs with `parallel` mode enabled.
 - Sets the control structure continuation keyword to be on the next line.
 
+```php
+// Before:
+
+if ($condition) {
+    // Do things
+} else {
+    // Do other things
+}
+
+
+// After:
+
+if ($condition) {
+    // Do things
+} 
+else {
+    // Do other things
+}
+```
+
 To install, run the following command within your plugin or project:
 
 ```shell
